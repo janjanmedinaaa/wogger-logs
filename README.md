@@ -4,7 +4,7 @@ A Development Logger that sends notifications via [Messenger Chatbot](m.me/wogge
 ## Usage
 
 ### Setup Global Config
-```
+```kotlin
 class MainActivity : AppCompatActivity() {
 
   companion object {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 ```
 
 ### Log and Send Notifications
-```
+```kotlin
 // Simple Log Message
 Wogger.d(TAG, "Test Line 30")
 

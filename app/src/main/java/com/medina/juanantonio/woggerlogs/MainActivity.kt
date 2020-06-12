@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         // Send the Log Message to Globally Set Platform and Receiver
         Wogger.i(TAG, "Running on Line 33").send()
 
-        // Send the Log Message based on a Condition
+        // Send the Log Message depending on a Condition
         Wogger.e(TAG, "Bug on Line 25").send(send = BuildConfig.DEBUG)
 
         // Send the Log Message with a Custom Platform and Receiver

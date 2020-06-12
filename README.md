@@ -1,5 +1,5 @@
 # Wogger Logs
-A Development Logger that sends notifications via [Messenger Chatbot](m.me/woggerlogs), SMS, or even a custom Webhook. Wogger helps you remotely debug issues on your Android Application through Webhook Events.
+A Development Logger that sends notifications via [Messenger Chatbot](https://m.me/woggerlogs), SMS, or even a custom Webhook. Wogger helps you remotely debug issues on your Android Application through Webhook Events.
 
 ## Usage
 

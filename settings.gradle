@@ -1,0 +1,3 @@
+rootProject.name='WoggerLogs'
+include ':app'
+include ':wogger'

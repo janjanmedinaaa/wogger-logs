@@ -1,8 +1,23 @@
 # Wogger Logs
 A Development Logger that sends notifications via [Messenger Chatbot](https://m.me/woggerlogs), SMS, or even a custom Webhook. Wogger helps you remotely debug issues on your Android Application through Webhook Events.
 
-## Usage
+## Installation
+- **Project** `build.gradle`
+```gradle
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
 
+- **App** `build.gradle` 
+```gradle
+implementation 'com.github.janjanmedinaaa:wogger-logs:1.0.0'
+```
+
+## Usage
 ### Setup Global Config
 ```kotlin
 class MainActivity : AppCompatActivity() {

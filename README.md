@@ -18,16 +18,13 @@ implementation 'com.github.janjanmedinaaa:wogger-logs:1.0.0'
 ```
 
 ## Usage
-### Setup Global Config
+### Basic Usage
 ```kotlin
 class MainActivity : AppCompatActivity() {
 
   companion object {
     const val TAG = "WOGGER_LOGS"
-
     const val WOGGER_MESSENGER_RECEIVER = ""
-    const val WOGGER_SMS_RECEIVER = ""
-    const val WOGGER_CUSTOM_WEBHOOK = ""
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +34,46 @@ class MainActivity : AppCompatActivity() {
     // Set the Global Config
     Wogger.apply {
       owner = this@MainActivity
+
       receiver = WOGGER_MESSENGER_RECEIVER
       platform = WoggerPlatform.MESSENGER
+    }
+
+    Wogger.d(TAG, "WoggerLogs Started").send()
+  }
+}
+```
+
+### Advanced Usage (Custom Webhooks and Listeners)
+```kotlin
+class MainActivity : AppCompatActivity(), LogListener {
+
+  companion object {
+    const val TAG = "WOGGER_LOGS"
+    const val WOGGER_CUSTOM_WEBHOOK = "https://webhook.com"
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    // Set the Global Config
+    Wogger.apply {
+      owner = this@MainActivity
+      listener = this@MainActivity
+
+      platform = WoggerPlatform.WEBHOOK
       webhook = WOGGER_CUSTOM_WEBHOOK
     }
+
+    Wogger.d(TAG, "WoggerLogs Started").send(
+      send = BuildConfig.DEBUG
+    )
   }
+
+  override fun onLogCreated(log: WoggerLog) { }
+
+  override fun onLogListUpdated(logs: Array<WoggerLog>) { }
 }
 ```
 

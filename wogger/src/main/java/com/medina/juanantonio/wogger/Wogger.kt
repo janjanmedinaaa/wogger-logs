@@ -4,7 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.Log
-import androidx.databinding.ObservableArrayList
+import com.medina.juanantonio.wogger.common.extensions.getApplicationName
+import com.medina.juanantonio.wogger.data.listeners.LogListener
 import com.medina.juanantonio.wogger.data.models.WoggerLog
 import com.medina.juanantonio.wogger.sender.Messenger
 import com.medina.juanantonio.wogger.sender.SMS
@@ -17,7 +18,9 @@ object Wogger {
     var receiver: String? = null
     var webhook: String? = null
 
-    var logs = ObservableArrayList<WoggerLog>()
+    var listener: LogListener? = null
+
+    private var logs = ArrayList<WoggerLog>()
 
     private var tag: String = ""
     private var msg: String = ""
@@ -89,14 +92,20 @@ object Wogger {
     }
 
     private fun setData(tag: String, msg: String, type: Int) {
-        logs.add(WoggerLog(type, msg))
+        WoggerLog(type, msg).let {
+            logs.add(it)
+            listener?.onLogCreated(it)
+            listener?.onLogListUpdated(logs.toTypedArray())
+        }
+
         this.tag = tag
         this.msg = msg
     }
 
     @SuppressLint("DefaultLocale")
     private fun formatText(msg: String): String {
-        return "Device Name: ${Build.MANUFACTURER.capitalize()} ${Build.MODEL} \n" +
+        return "App Name: ${owner?.getApplicationName()}\n" +
+                "Device Name: ${Build.MANUFACTURER.capitalize()} ${Build.MODEL}\n" +
                 "SDK Version: ${Build.VERSION.SDK_INT}\n" +
                 "Brand: ${Build.BRAND.capitalize()}\n\n$msg"
     }

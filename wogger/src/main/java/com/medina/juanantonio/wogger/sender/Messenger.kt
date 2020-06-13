@@ -3,7 +3,7 @@ package com.medina.juanantonio.wogger.sender
 import android.content.Context
 import android.util.Log
 import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.TextHttpResponseHandler
+import com.loopj.android.http.JsonHttpResponseHandler
 import com.medina.juanantonio.wogger.common.Constants.ContentType
 import com.medina.juanantonio.wogger.common.Constants.Params
 import com.medina.juanantonio.wogger.common.Constants.Wogger.WOGGER_MESSENGER_URL
@@ -37,14 +37,15 @@ class Messenger(private val context: Context?) {
             WOGGER_MESSENGER_URL,
             headers,
             ContentType.JSON,
-            object : TextHttpResponseHandler() {
+            object : JsonHttpResponseHandler() {
                 override fun onSuccess(
                     statusCode: Int,
                     headers: Array<out Header>?,
-                    responseString: String?
+                    response: JSONArray?
                 ) {
-                    Log.i(TAG, "Response Code: $statusCode")
-                    Log.i(TAG, "Response String: $responseString")
+                    super.onSuccess(statusCode, headers, response)
+                    Log.e(TAG, "Response Code: $statusCode")
+                    Log.e(TAG, "Response String: $response")
                 }
 
                 override fun onFailure(
@@ -53,6 +54,7 @@ class Messenger(private val context: Context?) {
                     responseString: String?,
                     throwable: Throwable?
                 ) {
+                    super.onFailure(statusCode, headers, responseString, throwable)
                     Log.e(TAG, "Response Code: $statusCode")
                     Log.e(TAG, "Response String: $responseString")
                     Log.e(TAG, "Throwable: $throwable")

@@ -14,7 +14,7 @@ allprojects {
 
 - **App** `build.gradle` 
 ```gradle
-implementation 'com.github.janjanmedinaaa:wogger-logs:1.0.0'
+implementation 'com.github.janjanmedinaaa:wogger-logs:1.1.0'
 ```
 
 ## Usage

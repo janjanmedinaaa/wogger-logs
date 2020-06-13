@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), LogListener {
 
     companion object {
         const val TAG = "WOGGER_LOGS"
-        const val WOGGER_MESSENGER_RECEIVER = "2846280848828368"
+        const val WOGGER_MESSENGER_RECEIVER = ""
     }
 
     private lateinit var binding: ActivityMainBinding
